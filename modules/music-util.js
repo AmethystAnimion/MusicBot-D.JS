@@ -275,9 +275,7 @@ const callbacks = {
 
         error: (info, e) => {
 
-            console.log(require("util").inspect(info));
-            console.log(require("util").inspect(e));
-            console.log(`\nDispatcher in ${info.server} has thrown an error:\n${e.stack}\n`);
+            console.log(`\nDispatcher in ${info.server} has thrown an error:\n${e}\n`);
 
         }
 
