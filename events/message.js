@@ -18,8 +18,8 @@ module.exports = class {
         if (!msg.content.startsWith(this.client.config.prefix))
             return;
         
-        const args = msg.content.toLowerCase().slice(this.client.config.prefix.length).trim().split(/ +/g);
-        const command = args.shift();
+        const args = msg.content.slice(this.client.config.prefix.length).trim().split(/ +/g);
+        const command = args.shift().toLowerCase();
 
         let cmd = this.client.commands.find(c => c.help.name === command || c.conf.aliases.includes(command));
         if (!cmd)
