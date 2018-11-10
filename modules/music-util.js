@@ -321,7 +321,7 @@ function createSong (client, user, videoInfo, stream, options) {
 function initializeConnection (info) {
 
     for (var [ event, callback ] of Object.entries(callbacks.connection))
-        info.connection.on(event, (info, ...args) => callback.call(null, info, ...args));
+        info.connection.on(event, (info, ...args) => callback(info, ...args));
 
     info.connection.isInitialized = true;
     
@@ -330,7 +330,7 @@ function initializeConnection (info) {
 function initializeDispatcher (info) {
 
     for (var [ event, callback ] of Object.entries(callbacks.dispatcher))
-        info.dispatcher.on(event, (info, ...args) => callback.call(null, info, ...args));
+        info.dispatcher.on(event, (info, ...args) => callback(info, ...args));
 
     info.dispatcher.isInitialized = true;
 
