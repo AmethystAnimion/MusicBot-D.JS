@@ -38,6 +38,8 @@ class Play extends SubCommand {
         
         if (args.length) {
 
+            console.log(require("util").inspect(args));
+
             let song = MusicUtil.getSongFromYouTubeURL(args[0]);
             if (!song)
                 return await msg.channel.send("You gave an invalid YouTube url!");
