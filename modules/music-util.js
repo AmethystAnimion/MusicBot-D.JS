@@ -139,7 +139,7 @@ class ServerMusicInfo {
 
 class Song {
 
-    constructor (client, userID, title, author, duration, url, thumbnailURL, stream, options = {}) {
+    constructor (client, userID, title, author, duration, url, thumbnailURL, options = {}) {
 
         this.options = Object.mergeDefault(SongDefaultOptions, options);
         this.client = client;
@@ -148,21 +148,15 @@ class Song {
         this.duration = duration; 
         this.url = url;
         this.thumbnailURL = thumbnailURL;
-        this.__stream = stream;
         this.__user = userID;
 
     }
 
     get stream () {
 
-        let newStream = new stream.PassThrough();
-        let returnStream = new stream.PassThrough();
+        let stream = ytdl(this.url, { filter: "audioonly" });
 
-        this.__stream.pipe(newStream);
-        this.__stream.pipe(returnStream);
-
-        this.__stream = newStream;
-        return returnStream;
+        return stream;
 
     }
 
@@ -288,10 +282,9 @@ async function getSongFromYouTubeURL (client, user, url) {
     if (!ytdl.validateURL(url))
         return null;
 
-    let stream = ytdl(url, { filter: "audioonly" });
     let info = await ytdl.getBasicInfo(url);
     
-    return createSong(client, user, info, stream);
+    return createSong(client, user, info);
 
 }
 
@@ -312,7 +305,7 @@ async function getSongsFromYouTube (client, user, query) {
 
 }
 
-function createSong (client, user, videoInfo, stream, options) {
+function createSong (client, user, videoInfo, options) {
 
     return new Song(client, user.id, videoInfo.title, videoInfo.author, videoInfo.length_seconds, videoInfo.video_url, videoInfo.thumbnail_url, stream, options);
 
