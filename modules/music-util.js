@@ -269,12 +269,14 @@ const callbacks = {
             if (!song)
                 return;
             
-            info.connection.playStream(song.stream);
+            await info.connection.playStream(song.stream);
 
         },
 
-        error: async (info, e) => {
+        error: (info, e) => {
 
+            console.log(require("util").inspect(info));
+            console.log(require("util").inspect(e));
             console.log(`\nDispatcher in ${info.server} has thrown an error:\n${e.stack}\n`);
 
         }
