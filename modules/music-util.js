@@ -330,9 +330,9 @@ function initializeConnection (info) {
 function initializeDispatcher (info) {
 
     for (var [ event, callback ] of Object.entries(callbacks.dispatcher))
-        dispatcher.on(event, (...args) => callback.call(null, info, ...args));
+        info.dispatcher.on(event, (...args) => callback.call(null, info, ...args));
 
-    dispatcher.isInitialized = true;
+    info.dispatcher.isInitialized = true;
 
 }
 
