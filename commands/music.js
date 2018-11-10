@@ -51,11 +51,7 @@ class Music extends GroupCommand {
             
         }
 
-        console.log(require("util").inspect(info));
-
         let song = info.queue.next();
-
-        console.log(require("util").inspect(song));
         
         await info.connection.playStream(song.stream);
         MusicUtil.initializeDispatcher(info);
