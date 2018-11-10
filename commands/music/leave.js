@@ -34,6 +34,7 @@ class Leave extends SubCommand {
             info.dispatcher.pause();
         
         await msg.guild.me.voiceChannel.leave();
+        info.logChannelID = null;
 
     }
 
