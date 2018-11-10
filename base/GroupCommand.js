@@ -98,7 +98,7 @@ class GroupCommand extends Command {
         if (!(await require("fs").existsSync(`./commands/${this.help.name}`)))
             return;
         
-        Klaw(`${this.conf.path.dir}\\${this.help.name}`, {
+        Klaw(`${this.conf.path.dir}/${this.help.name}`, {
 
             depthLimit: 0
 
