@@ -9,7 +9,7 @@ class MusicQueue {
 
     constructor () {
 
-        this._items = new Array();
+        this.__items = new Array();
         this.mode = PlayMode.ADVANCE;
 
     }
@@ -28,7 +28,7 @@ class MusicQueue {
 
     enqueue (...items) {
 
-        this._items.push(...items);
+        this.__items.push(...items);
 
     }
 
@@ -69,7 +69,7 @@ class MusicQueue {
 
     peek () {
 
-        return this._items[0];
+        return this.__items[0];
 
     }
 
@@ -81,8 +81,8 @@ class MusicQueue {
 
     *[Symbol.iterator] () {
 
-        for (let i = 0; i < this._items; i++)
-            yield this._items.shift();
+        for (let i = 0; i < this.__items; i++)
+            yield this.__items.shift();
 
     }
 
@@ -94,6 +94,7 @@ class ServerMusicInfo {
 
         this.client = client || null;
         this.id = serverID;
+        this.logChannelID = logChannelID;
         this.queue = new MusicQueue();
 
     }
