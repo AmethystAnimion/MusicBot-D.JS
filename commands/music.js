@@ -67,7 +67,7 @@ class Music extends GroupCommand {
 
     getInfo (id) {
 
-        info = this.servers[id];
+        let info = this.servers[id];
         if (!info)
             info = this.createServerMusicInfo(msg);
 
