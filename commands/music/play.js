@@ -37,8 +37,28 @@ class Play extends SubCommand {
         if (args.length) {
 
             let song = await MusicUtil.getSongFromYouTubeURL(this.client, msg.author, args[0]);
-            if (!song)
-                return await msg.channel.send("You gave an invalid YouTube url!");
+            if (!song) {
+
+                let results = await MusicUtil.getSongsFromYouTube(this.client, msg.author, args.join(' '));
+
+                let text = results.map((v, i) => ` [${i}] - ${v.title}`);
+
+                let res = await this.client.getUserResponse(msg, {
+
+                    embed: {
+
+                        description: `Results for '${args.join(" ")}':\n${text.join("\n")}\n [c] - Cancel`
+
+                    }
+
+                }, m => m.author.id === msg.author.id && (isNaN(+msg.content) ? msg.content.toLowerCase() === 'c' : (+msg.content >= 0 && +msg.content < results.length)));
+
+                if (!res)
+                    return;
+                
+                song = res;
+
+            }
             
             info.queue.enqueue(song);
             await msg.channel.send({
