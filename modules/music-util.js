@@ -196,7 +196,7 @@ const PlayMode = {
 
 const SongDefaultOptions = {
 
-    volume: 1,
+    volume: 0.5,
     bitrate: 48000
 
 };

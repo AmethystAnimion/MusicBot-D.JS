@@ -42,7 +42,13 @@ class Music extends GroupCommand {
             info = this.createServerMusicInfo(msg);
 
         let song = info.currentSong ? info.currentSong : info.queue.next();
-        
+        song.stream.on("end", () => {
+
+            if (info.dispatcher)
+                info.dispatcher.end();
+
+        });
+
         await info.connection.playStream(song.stream);
         MusicUtil.initializeDispatcher(info);
 
