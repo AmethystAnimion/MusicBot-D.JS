@@ -135,6 +135,12 @@ class ServerMusicInfo {
 
     }
 
+    set currentSong (value) {
+
+        this.queue.__items[-1] = value;
+
+    }
+
 }
 
 class Song {
@@ -253,6 +259,7 @@ const callbacks = {
 
         end: async (info, reason) => {
 
+            info.currentSong = null;
             info.client.commands.find(c => c.help.name === "music").play(info = info);
 
         },
