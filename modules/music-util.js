@@ -158,7 +158,7 @@ class Song {
         let minutes = Math.floor(this.durationSeconds / 60) % 60;
         let hours = Math.floor(this.durationSeconds / 3600);
         
-        return `${hours ? `${hours.digit(2)} : ` : ""}${minutes.digit(2)} : ${seconds.digit(2)}`;
+        return `${hours ? `${hours.digit(2)}:` : ""}${minutes.digit(2)}:${seconds.digit(2)}`;
 
     }
 
@@ -253,6 +253,9 @@ const callbacks = {
 
         end: async (info, reason) => {
 
+            if (reason === "LEAVE")
+                return;
+
             let song = info.queue.next();
             if (!song)
                 return;
@@ -263,7 +266,7 @@ const callbacks = {
 
         error: (info, e) => {
 
-            if (e)
+            if (e instanceof Error)
                 console.log(`\nDispatcher in ${info.server} has thrown an error:\n${e}\n`);
 
         }

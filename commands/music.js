@@ -56,6 +56,9 @@ class Music extends GroupCommand {
         await info.connection.playStream(song.stream);
         MusicUtil.initializeDispatcher(info);
 
+        info.dispatcher.setVolume(song.options.volume);
+        info.dispatcher.setBitrate(song.options.bitrate);
+
         if (info.logChannel)
             await info.logChannel.send({
 
