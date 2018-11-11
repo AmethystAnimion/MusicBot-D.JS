@@ -51,10 +51,23 @@ class Music extends GroupCommand {
             
         }
 
-        let song = info.queue.next();
+        let song = info.currentSong ? info.currentSong : info.queue.next();
         
         await info.connection.playStream(song.stream);
         MusicUtil.initializeDispatcher(info);
+
+        if (info.logChannel)
+            await info.logChannel.send({
+
+            embed: {
+
+                author: { name: "Now Playing..." },
+                description: `Title: [${info.currentSong.title}](${info.currentSong.url})\nLength: ${info.currentSong.duration}\nAuthor: [${info.currentSong.author.name}](${info.currentSong.author.channel_url})\nRequested By: ${info.currentSong.user ? info.currentSong.user.tag : "Unknown User"}`,
+                thumbnail: { url: info.currentSong.thumbnailURL }
+
+            }
+
+        });
 
     }
 

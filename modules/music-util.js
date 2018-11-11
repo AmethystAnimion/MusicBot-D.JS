@@ -237,23 +237,7 @@ const callbacks = {
 
         start: async (info) => {
 
-            if (!info.logChannel)
-                return;
             
-            if (!info.currentSong)
-                return;
-            
-            await info.logChannel.send({
-
-                embed: {
-
-                    author: { name: "Now Playing..." },
-                    description: `Title: [${info.currentSong.title}](${info.currentSong.url})\nLength: ${info.currentSong.duration}\nAuthor: [${info.currentSong.author.name}](${info.currentSong.author.channel_url})\nRequested By: ${info.currentSong.user ? info.currentSong.user.tag : "Unknown User"}`,
-                    thumbnail: { url: info.currentSong.thumbnailURL }
-
-                }
-
-            });
 
         },
 

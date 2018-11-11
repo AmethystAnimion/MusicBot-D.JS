@@ -43,6 +43,22 @@ class Play extends SubCommand {
                 return await msg.channel.send("You gave an invalid YouTube url!");
             
             info.queue.enqueue(song);
+            await msg.channel.send({
+
+                embed: {
+
+                    author: {
+
+                        name: msg.author.tag,
+                        icon_url: msg.author.displayAvatarURL
+
+                    },
+
+                    description: `Enqueued [${song.title}](${song.url})`
+
+                }
+                
+            });
 
         }
 
