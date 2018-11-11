@@ -19,6 +19,30 @@ class Play extends SubCommand {
 
         });
 
+        this.awaitMessageFilter = (msg, length, other) => {
+
+            if (msg.author.id !== other.author.id)
+                return false;
+            
+            if (!isNaN(+other.content)) {
+
+                let index = +other.content;
+                if (index >= 0 && index < length)
+                    return true;
+                
+                else
+                    return false;
+
+            }
+
+            else if (other.content.toLowerCase() === 'c')
+                return true;
+            
+            else 
+                return false;
+
+        }
+
     }
 
     async run (msg, args) {
@@ -51,7 +75,7 @@ class Play extends SubCommand {
 
                     }
 
-                }, m => m.author.id === msg.author.id && (isNaN(+msg.content) ? msg.content.toLowerCase() === 'c' : (+msg.content >= 0 && +msg.content < results.length)));
+                }, m => this.awaitMessageFilter(msg, results.length, m));
 
                 if (!res)
                     return;
