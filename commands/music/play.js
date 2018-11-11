@@ -32,7 +32,7 @@ class Play extends SubCommand {
         if (msg.guild.me.voiceChannelID !== msg.member.voiceChannelID)
             return await msg.channel.send("You're in the wrong voice channel. Come and join us.");
 
-        let info = this.group.getInfo();
+        let info = this.group.getInfo(msg);
         
         if (args.length) {
 

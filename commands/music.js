@@ -38,7 +38,7 @@ class Music extends GroupCommand {
 
     async play (msg) {
 
-        let info = this.getInfo(msg.guild.id)
+        let info = this.getInfo(msg);
         let song = info.currentSong ? info.currentSong : info.queue.next();
 
         let dispatcher = await info.connection.playStream(song.stream, { seek: 0, volume: song.options.volume, bitrate: song.options.bitrate, passes: 5 });
@@ -65,9 +65,9 @@ class Music extends GroupCommand {
 
     }
 
-    getInfo (id) {
+    getInfo (msg) {
 
-        let info = this.servers[id];
+        let info = this.servers[msg.guild.id];
         if (!info)
             info = this.createServerMusicInfo(msg);
 

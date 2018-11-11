@@ -29,9 +29,7 @@ class Join extends SubCommand {
         if (msg.guild.me.voiceChannelID === msg.member.voiceChannelID)
             return await msg.channel.send("I'm already in the voice channel.");
 
-        let info = this.group.servers[msg.guild.id];
-        if (!info)
-            info = this.group.createServerMusicInfo(msg);
+        let info = this.group.getInfo(msg);
         
         await msg.member.voiceChannel.join();
         info.logChannelID = msg.channel.id;

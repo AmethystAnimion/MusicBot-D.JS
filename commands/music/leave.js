@@ -26,7 +26,7 @@ class Leave extends SubCommand {
         if (!msg.guild.me.voiceChannel)
             return await msg.channel.send("I can't leave a channel that I'm not in!");
         
-        let info = this.group.getInfo();
+        let info = this.group.getInfo(msg);
 
         if (info.dispatcher)
             info.dispatcher.end("LEAVE");
