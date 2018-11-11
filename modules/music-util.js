@@ -318,12 +318,12 @@ function initializeConnection (info) {
     
 }
 
-function initializeDispatcher (info) {
+function initializeDispatcher (dispatcher, info) {
 
     for (var [ event, callback ] of Object.entries(callbacks.dispatcher))
-        info.dispatcher.on(event, (...args) => callback(info, ...args));
+        dispatcher.on(event, (...args) => callback(info, ...args));
 
-    info.dispatcher.isInitialized = true;
+    dispatcher.isInitialized = true;
 
 }
 
