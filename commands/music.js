@@ -44,8 +44,7 @@ class Music extends GroupCommand {
         let song = info.currentSong ? info.currentSong : info.queue.next();
         song.stream.on("end", () => {
 
-            if (info.dispatcher)
-                info.dispatcher.end();
+            dispatcher.end();
 
         });
 
