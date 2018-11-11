@@ -62,23 +62,21 @@ class Play extends SubCommand {
 
         }
 
-        if (info.queue.length && !info.dispatcher)
-            await this.group.play(msg, info);
-        
-        else {
+        else if (info.dispatcher) {
 
-            if (info.dispatcher && !args.length) {
-
-                if (info.dispatcher.paused)
-                    return await info.dispatcher.resume();
-                
-                else
-                    return await msg.channel.send("The music is already playing...");
-                
-            }
-
+            if (info.dispatcher.paused)
+                return await info.dispatcher.resume();
+            
+            else
+                return await msg.channel.send("The music is already playing...");
+            
         }
+
+        if (!info.queue.length)
+            return await msg.channel.send("The queue is empty. There's nothing to play");
         
+        await this.group.play(msg, info);
+
     }
 
 }

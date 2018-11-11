@@ -38,8 +38,8 @@ class Music extends GroupCommand {
         let song = info.currentSong ? info.currentSong : info.queue.next();
 
         if (!song)
-            return await msg.channel.send("The queue is empty. Please add some songs first.");
-
+            return;
+        
         let dispatcher = await info.connection.playStream(song.stream, { seek: 0, volume: song.options.volume, bitrate: song.options.bitrate, passes: 5 });
         
         dispatcher.on("end", async (reason) => {
