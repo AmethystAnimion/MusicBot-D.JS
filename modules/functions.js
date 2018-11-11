@@ -15,11 +15,10 @@ module.exports = (client) => {
     // For easy access.
     Object.mergeDefault = require("discord.js").Util.mergeDefault;
 
-    Number.prototype.digit = function (places) {
+    Number.prototype.digit = function (count) {
 
         let res = this.toString();
-        for (let i = places - res.length; i > 0; i--)
-            res = "0" + res;
+        res = " ".repeat(res.length > count ? 0 : count - res.length) + res;
         
         return res;
 
