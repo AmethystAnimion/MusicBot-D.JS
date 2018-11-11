@@ -253,7 +253,8 @@ const callbacks = {
 
         error: (info, e) => {
 
-            console.log(`\nDispatcher in ${info.server} has thrown an error:\n${e}\n`);
+            if (e)
+                console.log(`\nDispatcher in ${info.server} has thrown an error:\n${e}\n`);
 
         }
 
