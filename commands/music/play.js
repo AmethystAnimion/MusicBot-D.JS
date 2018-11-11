@@ -47,7 +47,7 @@ class Play extends SubCommand {
 
                     embed: {
 
-                        description: `Results for '${args.join(" ")}':\n${text.join("\n")}\n [c] - Cancel`
+                        description: `\`\`\`Results for '${args.join(" ")}':\n${text.join("\n")}\n [c] - Cancel\`\`\``
 
                     }
 
@@ -56,7 +56,14 @@ class Play extends SubCommand {
                 if (!res)
                     return;
                 
-                song = res;
+                else if (res.content.toLowerCase() === 'c')
+                    return;
+                
+                else if (results[+res.content])
+                    song = results[+res.content];
+                
+                else
+                    return;
 
             }
             

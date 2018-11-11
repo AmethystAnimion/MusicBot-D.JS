@@ -13,14 +13,24 @@ module.exports = (client) => {
     };
 
     // To get a response from a certain user.
-    client.getUserResponse = async (msg, message, filter, max = 1, limit = 60000) => {
+    client.getUserResponse = async (msg, message, filter, max = 1, limit = 30000) => {
 
-        let m = await msg.channel.send(message);
-        let c = await msg.channel.awaitMessages(filter || (m => m.author.id === msg.author.id), { max, time: limit, errors: [ "time" ] });
+        try {
 
-        m.delete();
+            let m = await msg.channel.send(message);
+            let c = await msg.channel.awaitMessages(filter || (m => m.author.id === msg.author.id), { max, time: limit, errors: [ "time" ] });
 
-        return c.first();
+            await m.delete();
+
+            return c.first();
+            
+        }
+
+        catch (e) {
+
+            return false;
+
+        }
 
     };
 
