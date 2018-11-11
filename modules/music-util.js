@@ -131,7 +131,7 @@ class ServerMusicInfo {
 
     get currentSong () {
 
-        return this.enqueue.__items[-1];
+        return this.queue.__items[-1];
 
     }
 
