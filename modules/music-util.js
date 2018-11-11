@@ -274,11 +274,11 @@ async function getSongFromYouTubeURL (client, user, url) {
 
 }
 
-async function getSongsFromYouTube (client, user, query) {
+async function getSongsFromYouTube (client, user, query, limit = 10) {
 
     let { results } = await search(query, {
 
-        maxResults: 10,
+        maxResults: limit,
         key: process.env.YT_API_KEY
 
     });

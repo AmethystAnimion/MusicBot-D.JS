@@ -75,7 +75,8 @@ class Play extends SubCommand {
         if (!info.queue.length)
             return await msg.channel.send("The queue is empty. There's nothing to play");
         
-        await this.group.play(msg, info);
+        if (!info.dispatcher)
+            await this.group.play(msg, info);
 
     }
 
