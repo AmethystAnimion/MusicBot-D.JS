@@ -95,7 +95,7 @@ class ServerMusicInfo {
         this.client = client || null;
         this.id = serverID;
         this.logChannelID = logChannelID;
-        this.dispatcher = dispatcher || null;
+        this.dispatcher = null;
         this.queue = new MusicQueue();
 
     }
