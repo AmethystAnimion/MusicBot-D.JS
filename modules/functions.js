@@ -22,8 +22,8 @@ module.exports = (client) => {
 
             await m.delete();
 
-            return c.first();
-            
+            return await c.first().delete();
+
         }
 
         catch (e) {

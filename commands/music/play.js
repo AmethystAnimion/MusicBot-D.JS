@@ -63,9 +63,13 @@ class Play extends SubCommand {
             let song = await MusicUtil.getSongFromYouTubeURL(this.client, msg.author, args[0]);
             if (!song) {
 
+                await msg.channel.startTyping();
+
                 let results = await MusicUtil.getSongsFromYouTube(this.client, msg.author, args.join(' '));
 
                 let text = results.map((v, i) => ` [${i}] - ${v.title}`);
+
+                await msg.channel.stopTyping();
 
                 let res = await this.client.getUserResponse(msg, {
 
