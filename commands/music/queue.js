@@ -24,7 +24,7 @@ class Queue extends SubCommand {
 
         let info = this.group.getInfo(msg);
 
-        if (cmd.toLowerCase() === "clear") {
+        if (cmd && cmd.toLowerCase() === "clear") {
 
             info.queue.clear();
             this.group.updateInfo(info);
