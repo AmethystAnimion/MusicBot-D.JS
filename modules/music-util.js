@@ -259,8 +259,10 @@ const callbacks = {
 
         end: async (info, reason) => {
 
+            console.log("Dispatcher ended.")
+
             info.currentSong = null;
-            info.client.commands.find(c => c.help.name === "music").play(info = info);
+            await info.client.commands.find(c => c.help.name === "music").play(info = info);
 
         },
 
@@ -321,9 +323,9 @@ function initializeConnection (info) {
 function initializeDispatcher (dispatcher, info) {
 
     for (var [ event, callback ] of Object.entries(callbacks.dispatcher))
-        dispatcher.on(event, (...args) => callback(info, ...args));
+        info.dispatcher.on(event, (...args) => callback(info, ...args));
 
-    dispatcher.isInitialized = true;
+    info.dispatcher.isInitialized = true;
 
 }
 

@@ -50,7 +50,7 @@ class Music extends GroupCommand {
         });
 
         let dispatcher = await info.connection.playStream(song.stream, { seek: 0, volume: song.options.volume, bitrate: song.options.bitrate, passes: 5 });
-        MusicUtil.initializeDispatcher(dispatcher, info);
+        MusicUtil.initializeDispatcher(info);
 
         if (info.logChannel)
             await info.logChannel.send({
