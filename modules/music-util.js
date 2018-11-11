@@ -257,6 +257,11 @@ const callbacks = {
             console.log("Dispatcher ended.")
 
             info.currentSong = null;
+            info.dispatcher = null;
+
+            if (reason === "LEAVE")
+                return;
+
             await info.client.commands.find(c => c.help.name === "music").play(info = info);
 
         },
@@ -303,24 +308,6 @@ async function getSongsFromYouTube (client, user, query) {
 function createSong (client, user, videoInfo, options) {
 
     return new Song(client, user.id, videoInfo.title, videoInfo.author, videoInfo.length_seconds, videoInfo.video_url, videoInfo.thumbnail_url, options);
-
-}
-
-function initializeConnection (info) {
-
-    for (var [ event, callback ] of Object.entries(callbacks.connection))
-        info.connection.on(event, (...args) => callback(info, ...args));
-
-    info.connection.isInitialized = true;
-    
-}
-
-function initializeDispatcher (dispatcher, info) {
-
-    for (var [ event, callback ] of Object.entries(callbacks.dispatcher))
-        info.dispatcher.on(event, (...args) => callback(info, ...args));
-
-    info.dispatcher.isInitialized = true;
 
 }
 

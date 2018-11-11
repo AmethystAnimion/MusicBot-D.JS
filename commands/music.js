@@ -29,19 +29,22 @@ class Music extends GroupCommand {
         this.servers[msg.guild.id] = info;
 
         if (info.connection)
-            MusicUtil.initializeConnection(info);
+            for (var [ event, callback ] of Object.entries(callbacks.connection))
+                info.connection.on(event, (...args) => callback(info, ...args));
 
         return info;
 
     }
 
-    async play (msg, info = null) {
+    async play (msg) {
 
         let info = this.getInfo(msg.guild.id)
         let song = info.currentSong ? info.currentSong : info.queue.next();
 
         let dispatcher = await info.connection.playStream(song.stream, { seek: 0, volume: song.options.volume, bitrate: song.options.bitrate, passes: 5 });
-        MusicUtil.initializeDispatcher(info);
+        
+        for (var [ event, callback ] of Object.entries(MusicUtil.callbacks.dispatcher))
+            dispatcher.on(event, (...args) => callback(info, ...args));
 
         info.dispatcher = dispatcher;
 
@@ -64,7 +67,7 @@ class Music extends GroupCommand {
 
     getInfo (id) {
 
-        info = info ? info : this.servers[msg.guild.id];
+        info = this.servers[id];
         if (!info)
             info = this.createServerMusicInfo(msg);
 
@@ -74,7 +77,7 @@ class Music extends GroupCommand {
 
     updateInfo (info) {
 
-        info[info.id] = info;
+        this.servers[info.id] = info;
 
     }
 
