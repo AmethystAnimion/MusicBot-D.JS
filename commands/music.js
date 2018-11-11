@@ -37,19 +37,13 @@ class Music extends GroupCommand {
 
     async play (msg, info = null) {
 
-        info = info ? info : this.servers[msg.guild.id];
-        if (!info)
-            info = this.createServerMusicInfo(msg);
-
+        let info = this.getInfo(msg.guild.id)
         let song = info.currentSong ? info.currentSong : info.queue.next();
-        song.stream.on("end", () => {
-
-            dispatcher.end();
-
-        });
 
         let dispatcher = await info.connection.playStream(song.stream, { seek: 0, volume: song.options.volume, bitrate: song.options.bitrate, passes: 5 });
         MusicUtil.initializeDispatcher(info);
+
+        info.dispatcher = dispatcher;
 
         if (info.logChannel)
             await info.logChannel.send({
@@ -63,6 +57,24 @@ class Music extends GroupCommand {
             }
 
         });
+
+        this.updateInfo(info);
+
+    }
+
+    getInfo (id) {
+
+        info = info ? info : this.servers[msg.guild.id];
+        if (!info)
+            info = this.createServerMusicInfo(msg);
+
+        return info;
+
+    }
+
+    updateInfo (info) {
+
+        info[info.id] = info;
 
     }
 
