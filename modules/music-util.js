@@ -154,7 +154,7 @@ class Song {
 
     get stream () {
 
-        let stream = ytdl(url, { filter: "audioonly" });
+        let stream = ytdl(this.url, { filter: "audioonly" });
 
         return stream;
 
