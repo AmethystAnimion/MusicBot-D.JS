@@ -321,8 +321,6 @@ module.exports = {
     getSongFromYouTubeURL,
     getSongsFromYouTube,
     isValidYoutubeURL: ytdl.validateURL,
-    callbacks,
-    initializeConnection,
-    initializeDispatcher
+    callbacks
 
 };
