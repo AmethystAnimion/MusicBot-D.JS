@@ -253,14 +253,7 @@ const callbacks = {
 
         end: async (info, reason) => {
 
-            if (reason === "LEAVE")
-                return;
-
-            let song = info.queue.next();
-            if (!song)
-                return;
-            
-            await info.connection.playStream(song.stream);
+            info.client.commands.find(c => c.help.name === "music").play(info = info);
 
         },
 

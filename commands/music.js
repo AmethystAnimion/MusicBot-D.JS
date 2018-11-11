@@ -41,18 +41,6 @@ class Music extends GroupCommand {
         if (!info)
             info = this.createServerMusicInfo(msg);
 
-        console.log(info.dispatcher);
-
-        if (info.dispatcher) {
-
-            if (info.dispatcher.paused)
-                return await info.dispatcher.resume();
-            
-            else
-                return await msg.channel.send("The music is already playing...");
-            
-        }
-
         let song = info.currentSong ? info.currentSong : info.queue.next();
         
         await info.connection.playStream(song.stream);

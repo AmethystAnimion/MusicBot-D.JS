@@ -21,7 +21,7 @@ class Leave extends SubCommand {
 
     }
 
-    async run (msg, arg) {
+    async run (msg, args) {
 
         if (!msg.guild.me.voiceChannel)
             return await msg.channel.send("I can't leave a channel that I'm not in!");
@@ -29,9 +29,9 @@ class Leave extends SubCommand {
         let info = this.group.servers[msg.guild.id];
         if (!info)
             return await msg.guild.me.voiceChannel.leave();
-        
+
         if (info.dispatcher)
-            info.dispatcher.end("LEAVE");
+            info.dispatcher.end();
         
         await msg.guild.me.voiceChannel.leave();
         info.logChannelID = null;
