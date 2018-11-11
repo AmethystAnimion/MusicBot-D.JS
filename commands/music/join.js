@@ -34,6 +34,8 @@ class Join extends SubCommand {
         await msg.member.voiceChannel.join();
         info.logChannelID = msg.channel.id;
 
+        this.group.updateInfo(info);
+
     }
 
 }
