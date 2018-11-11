@@ -286,18 +286,22 @@ async function getSongsFromYouTube (client, user, query, limit = 10) {
     let res = []
     for (var info of results) {
 
+        let song;
         try {
 
-            let song = await getSongFromYouTubeURL(client, user, info.link);
-            res.push(song);
+            song = await getSongFromYouTubeURL(client, user, info.link);
+            
 
         }
 
         catch (e) {
 
-            res.push(new Song(client, user, "Video not available", { name: "Unknown Author", channel_url: "https://www.youtube.com" }, 0, info.link, null));
+            song = new Song(client, user, "Video not available", { name: "Unknown Author", channel_url: "https://www.youtube.com" }, 0, info.link, "https://www.youtube.com");
 
         }
+
+        if (song)
+            res.push(song);
     
     }
 
