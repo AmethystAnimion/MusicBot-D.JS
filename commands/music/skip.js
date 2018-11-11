@@ -1,5 +1,5 @@
 
-
+const { SubCommand } = require("../../base/SubCommand.js");
 
 class Skip extends SubCommand {
 
@@ -31,3 +31,5 @@ class Skip extends SubCommand {
     }
 
 }
+
+module.exports = Skip;
