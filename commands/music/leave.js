@@ -29,7 +29,7 @@ class Leave extends SubCommand {
         let info = this.group.getInfo(msg);
 
         if (info.dispatcher)
-            info.dispatcher.end("LEAVE");
+            info.dispatcher = null;
         
         await msg.guild.me.voiceChannel.leave();
         info.logChannelID = null;
