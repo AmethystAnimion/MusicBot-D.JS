@@ -34,7 +34,7 @@ class Leave extends SubCommand {
         await msg.guild.me.voiceChannel.leave();
         info.logChannelID = null;
 
-        this.group.updateInfo();
+        this.group.updateInfo(info);
 
     }
 
