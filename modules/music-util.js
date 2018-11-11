@@ -252,20 +252,6 @@ const callbacks = {
 
         },
 
-        end: async (info, reason) => {
-
-            console.log("Dispatcher ended.")
-
-            info.currentSong = null;
-            info.dispatcher = null;
-
-            if (reason === "LEAVE")
-                return;
-
-            await info.client.commands.find(c => c.help.name === "music").play(info = info);
-
-        },
-
         error: (info, e) => {
 
             if (e instanceof Error)

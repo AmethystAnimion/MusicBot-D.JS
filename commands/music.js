@@ -28,10 +28,6 @@ class Music extends GroupCommand {
         let info = new MusicUtil.ServerMusicInfo(this.client, msg.guild.id, msg.channel.id);
         this.servers[msg.guild.id] = info;
 
-        if (info.connection)
-            for (var [ event, callback ] of Object.entries(callbacks.connection))
-                info.connection.on(event, (...args) => callback(info, ...args));
-
         return info;
 
     }
@@ -43,8 +39,17 @@ class Music extends GroupCommand {
 
         let dispatcher = await info.connection.playStream(song.stream, { seek: 0, volume: song.options.volume, bitrate: song.options.bitrate, passes: 5 });
         
-        for (var [ event, callback ] of Object.entries(MusicUtil.callbacks.dispatcher))
-            dispatcher.on(event, (...args) => callback(info, ...args));
+        dispatcher.on("end", async (reason) => {
+
+            info.currentSong = null;
+            info.dispatcher = null;
+
+            if (reason === "LEAVE")
+                return;
+
+            await this.play(msg);
+
+        });
 
         info.dispatcher = dispatcher;
 
