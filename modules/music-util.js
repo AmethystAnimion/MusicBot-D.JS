@@ -145,10 +145,20 @@ class Song {
         this.client = client;
         this.title = title;
         this.author = author;
-        this.duration = duration; 
+        this.durationSeconds = +duration; 
         this.url = url;
         this.thumbnailURL = thumbnailURL;
         this.__user = userID;
+
+    }
+
+    get durationString () {
+
+        let seconds = this.durationSeconds % 60;
+        let minutes = Math.floor(this.durationSeconds / 60) % 60;
+        let hours = Math.floor(this.durationSeconds / 3600);
+        
+        return `${hours ? `${hours.digit(2)} : ` : ""}${minutes.digit(2)} : ${seconds.digit(2)}`;
 
     }
 

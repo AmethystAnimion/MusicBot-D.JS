@@ -30,8 +30,8 @@ class Leave extends SubCommand {
         if (!info)
             return await msg.guild.me.voiceChannel.leave();
         
-        if (info.dispatcher && !info.dispatcher.paused)
-            info.dispatcher.pause();
+        if (info.dispatcher)
+            info.dispatcher.end("LEAVE");
         
         await msg.guild.me.voiceChannel.leave();
         info.logChannelID = null;
