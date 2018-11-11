@@ -288,7 +288,8 @@ async function getSongsFromYouTube (client, user, query, limit = 10) {
 
         try {
 
-            res.push(await getSongFromYouTubeURL(client, user, info.link));
+            let song = await getSongFromYouTubeURL(client, user, info.link);
+            res.push(song);
 
         }
 
