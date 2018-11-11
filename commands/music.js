@@ -41,6 +41,8 @@ class Music extends GroupCommand {
         if (!info)
             info = this.createServerMusicInfo(msg);
 
+        console.log(info.dispatcher);
+
         if (info.dispatcher) {
 
             if (info.dispatcher.paused)
