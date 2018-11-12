@@ -296,7 +296,7 @@ async function getSongsFromYouTube (client, user, query, limit = 10) {
 
         catch (e) {
 
-            song = new Song(client, user, "Video not available", { name: "Unknown Author", channel_url: "https://www.youtube.com" }, 0, info.link, "https://www.youtube.com");
+            song = new Song(client, user.id, "Video not available", { name: "Unknown Author", channel_url: "https://www.youtube.com" }, 0, info.link, "https://www.youtube.com");
 
         }
 
