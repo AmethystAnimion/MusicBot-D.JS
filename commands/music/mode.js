@@ -35,14 +35,14 @@ class Mode extends SubCommand {
         if (msg.member.voiceChannelID !== msg.guild.me.voiceChannelID)
             return await msg.channel.send("Please join the voice channel first.");
         
+        let info = this.group.getInfo(msg);
+        
         if (!mode)
-            return await msg.channel.send(`Current mode: ${}`)
+            return await msg.channel.send(`Current mode: ${Object.entries(this.modes).find(i => i[1] === info.queue.mode)[0]}`);
 
         let newMode = this.modes[mode ? mode.toLowerCase() : mode];
         if (!newMode)
             return await msg.channel.send(`Please enter the correct mode. (${Object.getOwnPropertyNames(this.modes).join(", ")})`);
-        
-        let info = this.group.getInfo(msg);
 
         info.queue.mode = newMode;
 
