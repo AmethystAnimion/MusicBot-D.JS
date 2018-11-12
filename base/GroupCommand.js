@@ -130,11 +130,11 @@ class GroupCommand extends Command {
 
     }
 
-    async run (msg, args) {
+    async run (msg, [command, ...args]) {
 
-        let cmd = this.commands.find(c => c.help.name === args[0] || c.conf.aliases.includes(args[0]));
+        let cmd = this.commands.find(c => c.help.name === command || c.conf.aliases.includes(command));
         if (!cmd)
-            return await this.conf.defaultRun(msg, args);
+            return await this.conf.defaultRun(msg, [command, ...args]);
         
         // #CopyPastedFromMessage.js
         let cooldown = cmd.getUserCooldown(msg.author);
