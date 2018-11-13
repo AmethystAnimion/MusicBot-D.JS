@@ -44,13 +44,8 @@ class Music extends GroupCommand {
         
         dispatcher.on("end", async (reason) => {
 
-            let info = this.getInfo(msg);
-            let song = info.currentSong;
-
             info.currentSong = null;
             info.dispatcher = null;
-
-            this.updateInfo(info);
 
             if (reason === "LEAVE")
                 return;
@@ -60,8 +55,6 @@ class Music extends GroupCommand {
             
             if (info.queue.mode === MusicUtil.PlayMode.REPEAT_ONE)
                 info.queue.__items.unshift(song);
-            
-            this.updateInfo(info);
 
             await this.play(msg);
 
