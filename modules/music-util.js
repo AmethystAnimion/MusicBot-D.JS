@@ -79,13 +79,14 @@ class MusicQueue {
 
 class ServerMusicInfo {
 
-    constructor (client, serverID, logChannelID) {
+    constructor (client, serverID, logChannelID, options) {
 
         this.client = client || null;
         this.id = serverID;
         this.logChannelID = logChannelID;
         this.dispatcher = null;
         this.queue = new MusicQueue();
+        this.options = Object.mergeDefault(DefaultOptions, options);
 
     }
 
@@ -129,9 +130,8 @@ class ServerMusicInfo {
 
 class Song {
 
-    constructor (client, userID, title, author, duration, url, thumbnailURL, options = {}) {
+    constructor (client, userID, title, author, duration, url, thumbnailURL) {
 
-        this.options = Object.mergeDefault(SongDefaultOptions, options);
         this.client = client;
         this.title = title;
         this.author = author;
@@ -178,7 +178,7 @@ const PlayMode = {
 
 };
 
-const SongDefaultOptions = {
+const DefaultOptions = {
 
     volume: 0.5,
     bitrate: 48000
@@ -298,9 +298,9 @@ async function getSongsFromYouTube (client, user, query, limit = 10) {
 
 }
 
-function createSong (client, user, videoInfo, options) {
+function createSong (client, user, videoInfo) {
 
-    return new Song(client, user.id, videoInfo.title, videoInfo.author, videoInfo.length_seconds, videoInfo.video_url, videoInfo.thumbnail_url, options);
+    return new Song(client, user.id, videoInfo.title, videoInfo.author, videoInfo.length_seconds, videoInfo.video_url, videoInfo.thumbnail_url);
 
 }
 
@@ -310,10 +310,10 @@ module.exports = {
     ServerMusicInfo,
     Song,
     PlayMode,
-    SongDefaultOptions,
     getSongFromYouTubeURL,
     getSongsFromYouTube,
     isValidYoutubeURL: ytdl.validateURL,
-    callbacks
+    callbacks,
+    createSong
 
 };

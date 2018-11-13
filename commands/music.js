@@ -40,7 +40,7 @@ class Music extends GroupCommand {
         if (!song)
             return;
         
-        let dispatcher = await info.connection.playStream(song.stream, { seek: 0, volume: song.options.volume, bitrate: song.options.bitrate, passes: 5 });
+        let dispatcher = await info.connection.playStream(song.stream, { seek: 0, volume: info.options.volume, bitrate: info.options.bitrate, passes: 5 });
         
         dispatcher.on("end", async (reason) => {
 
