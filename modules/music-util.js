@@ -37,26 +37,15 @@ class MusicQueue {
         let item;
         switch (this.mode) {
 
+            case PlayMode.REPEAT:
+            case PlayMode.REPEAT_ONE:            
             case PlayMode.ADVANCE:
                 item = this.__items.shift();
                 break;
             
-            case PlayMode.REPEAT:
-                item = this.__items.shift();
-                this.enqueue(item);
-                break;
-
-            case PlayMode.REPEAT_ONE:
-                item = this.__items[0];
-                break;
-            
+            case PlayMode.SHUFFLE_REPEAT:
             case PlayMode.SHUFFLE:
                 item = this.__items.splice(Math.floor(Math.random() * this.__items.length), 1);
-                break;
-            
-            case PlayMode.SHUFFLE_REPEAT:
-                item = this.__items.splice(Math.floor(Math.random() * (this.__items.length - 1)), 1);
-                this.enqueue(item);
                 break;
 
         }
