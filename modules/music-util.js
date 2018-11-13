@@ -28,24 +28,13 @@ class MusicQueue {
 
     get items () {
 
-        if (this.mode === 1 || this.mode === 4)
-            return this.__items.slice(0, this.length - 1);
-
-        else if (this.mode === 2)
-            return this.__items.slice(1);
-        
-        else
-            return this.__items;
+        return this.__items;
 
     }
 
     enqueue (...items) {
 
-        if (this.mode === 1 || this.mode === 4)
-            this.__items.splice(this.length - 2, 0, ...items);
-
-        else
-            this.__items.push(...items);
+        this.__items.push(...items);
 
     }
 
@@ -60,14 +49,14 @@ class MusicQueue {
             
             case PlayMode.REPEAT:
                 item = this.__items.shift();
-                if (item)
-                    this.__items.push(item);
+                if (this.__items[-1])
+                    this.__items.push(this.__items[-1]);
                 break;
 
-            case PlayMode.REPEAT_ONE:   
+            case PlayMode.REPEAT_ONE:
+                if (this.__items[-1])
+                    this.__items.unshift(this.__items[-1]);
                 item = this.__items.shift();
-                if (item)
-                    this.__items.unshift(item);
                 break;
 
             case PlayMode.SHUFFLE:
@@ -76,8 +65,8 @@ class MusicQueue {
 
             case PlayMode.SHUFFLE_REPEAT:
                 item = this.__items.splice(Math.floor(Math.random() * this.__items.length), 1);
-                if (item)
-                    this.__items.push(item);
+                if (this.__items[-1])
+                    this.__items.push(this.__items[-1]);
                 break;
 
         }
