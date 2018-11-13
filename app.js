@@ -1,3 +1,4 @@
+"use strict";
 
 // NodeJS Modules
 const Path = require("path");
@@ -146,4 +147,4 @@ init();
 client.on("reconnecting", () => console.log("Reconnecting client..."))
     .on("disconnect", () => console.log("Client has been disconnected from Discord."))
     .on("warn", (info) => console.warn(`WARNING  : ${info}`))
-    .on("error", e => console.error(`An error was thrown:\n${e.stack}`));
+    .on("error", e => console.error(`An error was thrown:\n${e}`));

@@ -117,7 +117,7 @@ class Play extends SubCommand {
 
         }
 
-        else if (info.dispatcher) {
+        else if (info.currentSong) {
 
             if (info.dispatcher.paused)
                 return await info.dispatcher.resume();
@@ -130,7 +130,7 @@ class Play extends SubCommand {
         if (!info.queue.length)
             return await msg.channel.send("The queue is empty. There's nothing to play");
         
-        if (!info.dispatcher)
+        if (!info.currentSong)
             await this.group.play(msg, info);
 
     }
