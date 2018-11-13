@@ -79,7 +79,7 @@ class MusicQueue {
 
 class ServerMusicInfo {
 
-    constructor (client, serverID, logChannelID, options) {
+    constructor (client, serverID, logChannelID, options = {}) {
 
         this.client = client || null;
         this.id = serverID;
