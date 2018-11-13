@@ -28,7 +28,7 @@ class Leave extends SubCommand {
         
         let info = this.group.getInfo(msg);
 
-        if (info.currentSong)
+        if (info.currentSong && (info.queue.mode === 0 || info.queue.mode === 3))
             info.queue.__items.unshift(info.currentSong);
 
         if (info.dispatcher)

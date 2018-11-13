@@ -84,10 +84,7 @@ class Play extends SubCommand {
                 if (!res)
                     return;
                 
-                else if (res.content.toLowerCase() === 'c')
-                    return;
-                
-                else if (results[+res.content])
+                if (results[+res.content])
                     song = results[+res.content];
                 
                 else

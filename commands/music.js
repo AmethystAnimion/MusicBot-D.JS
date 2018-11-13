@@ -49,12 +49,6 @@ class Music extends GroupCommand {
 
             if (reason === "LEAVE")
                 return;
-            
-            if (info.queue.mode === MusicUtil.PlayMode.REPEAT || info.queue.mode === MusicUtil.PlayMode.SHUFFLE_REPEAT)
-                info.queue.enqueue(song);
-            
-            if (info.queue.mode === MusicUtil.PlayMode.REPEAT_ONE)
-                info.queue.__items.unshift(song);
 
             await this.play(msg);
 

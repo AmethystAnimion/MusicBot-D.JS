@@ -54,7 +54,7 @@ class Queue extends SubCommand {
         for (let i = 0; i < info.queue.length; i++) {
 
             let indent = " ".repeat(count - i.toString().length);
-            s.push(`${indent}${i + 1} : ${info.queue.__items[i].title}`);
+            s.push(`${indent}${i + 1} : ${info.queue.items[i].title}`);
 
         }
 
